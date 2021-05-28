@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import Expenses from "./components/Expenses";
+import NewExpense from "./components/NewExpense";
+import { ExpenseContext } from "./context/ExpenseContext";
 function App() {
+  const dummyData = [
+    {
+      title: "Car Wash",
+      amount: 270,
+      date: new Date(2021, 3, 13),
+      id: "e1",
+    },
+    {
+      title: "Recharge",
+      amount: 400,
+      date: new Date(2020, 2, 13),
+      id: "e2",
+    },
+    {
+      title: "Vegetables",
+      amount: 400,
+      date: new Date(2020, 8, 13),
+      id: "e4",
+    },
+  ];
+
+  const [expenses, setExpenses] = useState(dummyData);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ExpenseContext.Provider value={{ expenses, setExpenses }}>
+        <NewExpense />
+        <Expenses />
+      </ExpenseContext.Provider>
     </div>
   );
 }
