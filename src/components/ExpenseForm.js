@@ -2,12 +2,20 @@ import React, { useState, useContext } from "react";
 import { ExpenseContext } from "../context/ExpenseContext";
 import "./ExpenseForm.css";
 
+const giveDate = () => {
+  let expenseDate = new Date();
+  const month = expenseDate.toLocaleString("en-Us", { month: "2-digit" });
+  const day = expenseDate.toLocaleString("en-Us", { day: "2-digit" });
+  const year = expenseDate.getFullYear();
+  const todayDate = year + "-" + month + "-" + day;
+  return todayDate;
+};
 const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
-  const [enteredDate, setEnteredDate] = useState("");
+  const [enteredDate, setEnteredDate] = useState(giveDate());
 
-  const { setExpenses } = useContext(ExpenseContext);
+  const { expenses, setExpenses } = useContext(ExpenseContext);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -35,13 +43,17 @@ const ExpenseForm = (props) => {
       return [expense, ...prevExpenses];
     });
 
+    // window.localStorage.removeItem("1");
+
     setEnteredTitle("");
     setEnteredAmount("");
-    setEnteredDate("");
+    setEnteredDate(giveDate());
   };
 
   return (
     <form onSubmit={submitHandler}>
+      {console.log(expenses)}
+      {window.localStorage.setItem("1", JSON.stringify(expenses))}
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>

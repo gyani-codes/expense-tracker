@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Expenses from "./components/Expenses";
 import NewExpense from "./components/NewExpense";
 import { ExpenseContext } from "./context/ExpenseContext";
 function App() {
-  const dummyData = [
+  let dummyData = [
     {
       title: "Car Wash",
       amount: 270,
@@ -25,6 +25,15 @@ function App() {
   ];
 
   const [expenses, setExpenses] = useState(dummyData);
+
+  useEffect(() => {
+    if (window.localStorage.getItem("1") != null) {
+      let v = JSON.parse(window.localStorage.getItem("1"));
+      let v2 = v.map((e) => ({ ...e, date: new Date(e.date) }));
+      console.log(v2);
+      setExpenses(v2);
+    }
+  }, []);
 
   return (
     <div>
