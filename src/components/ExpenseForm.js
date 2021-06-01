@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ExpenseContext } from "../context/ExpenseContext";
+import Backdrop from "./BackDrop";
 import "./ExpenseForm.css";
 
 const giveDate = () => {
@@ -49,8 +50,6 @@ const ExpenseForm = (props) => {
       return [expense, ...prevExpenses];
     });
 
-    // window.localStorage.removeItem("1");
-
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate(giveDate());
@@ -91,6 +90,7 @@ const ExpenseForm = (props) => {
       <div className="new-expense__actions">
         <button type="submit">Add Expense</button>
       </div>
+      {/* <Backdrop></Backdrop> */}
     </form>
   );
 };
