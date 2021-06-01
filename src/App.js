@@ -30,11 +30,13 @@ function App() {
     if (window.localStorage.getItem("1") != null) {
       let v = JSON.parse(window.localStorage.getItem("1"));
       let v2 = v.map((e) => ({ ...e, date: new Date(e.date) }));
-      console.log(v2);
       setExpenses(v2);
     }
   }, []);
 
+  useEffect(() => {
+    window.localStorage.setItem("1", JSON.stringify(expenses));
+  });
   return (
     <div>
       <ExpenseContext.Provider value={{ expenses, setExpenses }}>

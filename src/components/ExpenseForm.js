@@ -15,7 +15,7 @@ const ExpenseForm = (props) => {
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState(giveDate());
 
-  const { expenses, setExpenses } = useContext(ExpenseContext);
+  const { setExpenses } = useContext(ExpenseContext);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -31,6 +31,12 @@ const ExpenseForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    if (enteredTitle === "" || enteredAmount === "") {
+      // TODO
+      console.log("Don't Add expense");
+      return;
+    }
 
     const expense = {
       title: enteredTitle,
@@ -52,8 +58,6 @@ const ExpenseForm = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      {console.log(expenses)}
-      {window.localStorage.setItem("1", JSON.stringify(expenses))}
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>

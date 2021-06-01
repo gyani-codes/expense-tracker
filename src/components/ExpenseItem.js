@@ -4,7 +4,7 @@ import "./ExpenseItem.css";
 import "./ExpenseForm.css";
 import { ExpenseContext } from "../context/ExpenseContext";
 function ExpenseItem(props) {
-  const { expenses, setExpenses } = useContext(ExpenseContext);
+  const { setExpenses } = useContext(ExpenseContext);
 
   const deleteButtonHandler = () => {
     let expenseId = props.id;
@@ -14,7 +14,6 @@ function ExpenseItem(props) {
       return prevExpenses.filter((item) => item.id !== expenseId);
       // return [];
     });
-    window.localStorage.setItem("1", JSON.stringify(expenses));
   };
   return (
     <div className="expense-item">
